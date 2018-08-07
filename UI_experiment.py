@@ -10,7 +10,7 @@ import numpy as np
 import scipy.io as io
 import keras
 from keras import backend as K
-from EEG_models import ShallowConvNet, SCCNet
+from EEG_models import ShallowConvNet
 from keras.callbacks import Callback, EarlyStopping
 
 
@@ -47,7 +47,6 @@ batch_size = 100
 n_epoch = 100
 varEarlyStopping = 0
 n_patience = 10
-
 
 model = ShallowConvNet(input_shape)
 #model = SCCNet(input_shape)
