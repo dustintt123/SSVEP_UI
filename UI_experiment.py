@@ -27,7 +27,7 @@ y_train = SSVEP_label[np.where(SSVEP_label[:,1]==1),0]
 y_train_onehot = keras.utils.to_categorical(y_train-1, n_class)
 x_test = np.squeeze(SSVEP_l[:,:,np.where(SSVEP_label[:,1]==2)])
 x_test = np.transpose(x_test, axes = [2, 0, 1])
-y_test = np.squeeze(SSVEP_label[np.where(SSVEP_label[:,1]==1),0])
+y_test = np.squeeze(SSVEP_label[np.where(SSVEP_label[:,1]==2),0])
 y_test_onehot = keras.utils.to_categorical(y_test-1, n_class)
 
 
@@ -44,7 +44,7 @@ else:
     input_shape = (n_channel, n_timesamp, 1)
 
 batch_size = 100
-n_epoch = 100
+n_epoch = 5
 varEarlyStopping = 0
 n_patience = 10
 
@@ -76,6 +76,9 @@ fit_hist = model.fit(x_train, y_train_onehot,
       validation_split=0.25,
       callbacks=callbacks,
       shuffle=True)
+
+#y_hat = model.predict_on_batch(x_test)
+model.evaluate(x_test, y_test_onehot, verbose = 1)
 
 
 
