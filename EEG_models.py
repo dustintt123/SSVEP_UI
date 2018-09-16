@@ -21,7 +21,7 @@ def safe_log(x):
 
 n_ch = 9
 n_samp = 247
-n_class = 8
+n_class = 2
 dropout_rate = 0.5
 
 
@@ -49,10 +49,10 @@ def ShallowConvNet(input_shape):
 #    print(input_shape)
     # start the model
     input_EEG = Input(input_shape) 
-    block1       = Conv2D(10, (1, 13), 
+    block1       = Conv2D(10, (1, 25), 
                                  input_shape=(1, n_ch, n_samp),
                                  kernel_constraint = max_norm(2.))(input_EEG)
-    block1       = Conv2D(10, (n_ch, 1), use_bias=False, 
+    block1       = Conv2D(10, (n_ch, 1), use_bias=True, 
                           kernel_constraint = max_norm(2.))(block1)
     block1       = BatchNormalization(axis=1, epsilon=1e-05, momentum=0.1)(block1)
     block1       = Activation(square)(block1)
